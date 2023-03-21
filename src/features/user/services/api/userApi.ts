@@ -1,8 +1,5 @@
 import { User } from "../../domain";
-
-export interface IUserApi {
-  signIn: () => Promise<User>;
-}
+import { IUserApi } from "../../application/ports";
 
 export const userApi: IUserApi = {
   signIn: () =>
