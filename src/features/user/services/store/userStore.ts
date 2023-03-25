@@ -10,7 +10,7 @@ const emptyUser: User = {
   role: "reader",
 };
 
-export class UserStore implements IUserStore {
+class UserStore implements IUserStore {
   user: User;
 
   constructor() {

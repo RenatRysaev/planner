@@ -1,3 +1,9 @@
+import { Team } from "./Team";
+
 export const TeamPage = () => {
-  return <div>TeamPage</div>;
+  return (
+    <div>
+      <Team />
+    </div>
+  );
 };
