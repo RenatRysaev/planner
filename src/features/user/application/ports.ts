@@ -1,11 +1,12 @@
 import { User } from "../domain";
+import { INetworkStore } from "../../../shared/ports";
 
-export interface IUserStore {
+export type IUserStore = {
   user: User;
   saveUser: (user: User) => void;
   resetUser: () => void;
-}
+} & INetworkStore;
 
-export interface IUserApi {
+export type IUserApi = {
   signIn: () => Promise<User>;
-}
+};

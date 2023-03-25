@@ -4,7 +4,7 @@ export type INavigate = {
   push: (to: To) => void;
 };
 
-export type NetworkStore = {
+export type INetworkStore = {
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
   loadingError?: string;

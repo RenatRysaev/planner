@@ -17,10 +17,11 @@ export class TeamUseCases {
   public getTeam = async () => {
     try {
       this.teamStore.setIsLoading(true);
+
       const team = await this.teamApi.getTeam();
       this.teamStore.saveTeam(team);
     } catch (error) {
-      this.teamStore.setLoadingError(`${error}`);
+      this.teamStore.setLoadingError(String(error));
     } finally {
       this.teamStore.setIsLoading(false);
     }

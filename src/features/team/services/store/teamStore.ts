@@ -1,32 +1,17 @@
-import { ITeamStore } from "../../application/ports";
 import { makeAutoObservable } from "mobx";
+import { ITeamStore } from "../../application/ports";
+import { networkStore } from "../../../../shared/networkStore";
 
-const emptyTeam: ITeamStore["team"] = [];
+export const teamStore = makeAutoObservable<ITeamStore>({
+  ...networkStore,
 
-class TeamStore implements ITeamStore {
-  public team: ITeamStore["team"] = emptyTeam;
-  public isLoading: ITeamStore["isLoading"] = false;
-  public loadingError: ITeamStore["loadingError"] = "";
+  team: [],
 
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  public saveTeam(team: ITeamStore["team"]) {
+  saveTeam(team) {
     this.team = team;
-  }
+  },
 
-  public resetTeam() {
+  resetTeam() {
     this.team = [];
-  }
-
-  public setLoadingError(error: string) {
-    this.loadingError = error;
-  }
-
-  public setIsLoading(isLoading: boolean) {
-    this.isLoading = isLoading;
-  }
-}
-
-export const teamStore = new TeamStore();
+  },
+});

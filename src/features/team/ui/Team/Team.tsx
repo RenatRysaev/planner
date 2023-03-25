@@ -19,23 +19,25 @@ export const Team = observer(() => {
         <div>Loading...</div>
       ) : (
         <table>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-          </tr>
+          <tbody>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+            </tr>
 
-          {teamStore.team.map((member) => {
-            return (
-              <tr key={member.id}>
-                <td>
-                  {member.name} {member.surname}
-                </td>
-                <td>{member.email}</td>
-                <td>{member.role}</td>
-              </tr>
-            );
-          })}
+            {teamStore.team.map((member) => {
+              return (
+                <tr key={member.id}>
+                  <td>
+                    {member.name} {member.surname}
+                  </td>
+                  <td>{member.email}</td>
+                  <td>{member.role}</td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       )}
     </div>

@@ -1,6 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import { User } from "../../domain";
 import { IUserStore } from "../../application/ports";
+import { networkStore } from "../../../../shared/networkStore";
 
 const emptyUser: User = {
   id: "",
@@ -10,21 +11,16 @@ const emptyUser: User = {
   role: "reader",
 };
 
-class UserStore implements IUserStore {
-  user: User;
+export const userStore = makeAutoObservable<IUserStore>({
+  ...networkStore,
 
-  constructor() {
-    this.user = emptyUser;
-    makeAutoObservable(this);
-  }
+  user: emptyUser,
 
-  saveUser(user: User) {
+  saveUser(user) {
     this.user = user;
-  }
+  },
 
   resetUser() {
     this.user = emptyUser;
-  }
-}
-
-export const userStore = new UserStore();
+  },
+});

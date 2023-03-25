@@ -24,11 +24,17 @@ export class AuthUseCases {
 
   public signIn = async () => {
     try {
+      this.userStore.setIsLoading(true);
+
       const user = await this.userApi.signIn();
       this.userStore.saveUser(user);
+
       this.navigate.push("/");
     } catch (error) {
+      this.userStore.setLoadingError(String(error));
       console.error("sign in error:", error);
+    } finally {
+      this.userStore.setIsLoading(false);
     }
   };
 }
