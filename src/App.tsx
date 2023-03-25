@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import { RouterMy } from "./Router";
+import { Router } from "./Router";
 
 export const App = () => {
-  return <RouterMy />;
+  return <Router />;
 };
