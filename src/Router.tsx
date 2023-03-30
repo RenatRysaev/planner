@@ -1,6 +1,6 @@
 import { Router as ReactRouter, Switch, Route } from "react-router";
-import { SignInPage } from "features/user/ui";
-import { TeamPage } from "features/team/ui";
+import { SignInPage } from "slices/user/ui";
+import { TeamPage } from "slices/team/ui";
 
 import { history } from "./navigate";
 

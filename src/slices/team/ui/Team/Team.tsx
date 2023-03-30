@@ -1,20 +1,23 @@
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { Table, Button, Typography } from "antd";
+import { Table, Typography } from "antd";
 import type { ColumnsType } from "antd/es/table";
 
-import { User } from "features/user/domain";
+import { User } from "slices/user/domain";
 import { Layer } from "shared/components/Layer";
 
 import { teamUseCases } from "../../application";
 import { teamStore } from "../../services";
-import styles from "./styles.module.scss";
+import { AddTeamMember } from "./AddTeamMember";
 
 const columns: ColumnsType<User> = [
   {
     title: "Name",
     dataIndex: "name",
     key: "name",
+    render: (value, record) => {
+      return `${record.name} ${record.surname}`;
+    },
   },
   {
     title: "Email",
@@ -36,14 +39,13 @@ export const Team = observer(() => {
   return (
     <Layer>
       <Typography.Title>Team</Typography.Title>
-      <Button className={styles.addMemberButton} type="primary">
-        Add member
-      </Button>
+
+      <AddTeamMember />
 
       {teamStore.isLoading ? (
         <div>Loading...</div>
       ) : (
-        <Table columns={columns} dataSource={teamStore.team} />
+        <Table columns={columns} dataSource={teamStore.team} rowKey="id" />
       )}
     </Layer>
   );
