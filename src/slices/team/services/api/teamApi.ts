@@ -1,5 +1,6 @@
 import { ITeamApi } from "../../application/ports";
 import { ITeam } from "../../domain";
+import { HttpStatus } from "shared/enums/httpStatus";
 
 const fakeTeam: ITeam = [
   {
@@ -30,6 +31,27 @@ export const teamApi: ITeamApi = {
     new Promise<ITeam>((resolve) => {
       setTimeout(() => {
         resolve(fakeTeam);
+      }, 1500);
+    }),
+
+  addTeamMember: (teamMember) =>
+    new Promise<HttpStatus>((resolve) => {
+      setTimeout(() => {
+        resolve(201);
+      }, 1500);
+    }),
+
+  removeTeamMember: (teamMemberId) =>
+    new Promise<HttpStatus>((resolve) => {
+      setTimeout(() => {
+        resolve(200);
+      }, 1500);
+    }),
+
+  editTeamMember: (teamMember) =>
+    new Promise<HttpStatus>((resolve) => {
+      setTimeout(() => {
+        resolve(200);
       }, 1500);
     }),
 };

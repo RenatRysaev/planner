@@ -1,5 +1,5 @@
 import { User } from "../domain";
-import { INetworkStore } from "../../../shared/ports";
+import { INetworkStore } from "shared/ports";
 
 export type IUserStore = {
   user: User;

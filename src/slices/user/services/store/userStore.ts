@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
+import { networkStore } from "shared/networkStore";
 import { User } from "../../domain";
 import { IUserStore } from "../../application/ports";
-import { networkStore } from "../../../../shared/networkStore";
 
 const emptyUser: User = {
   id: "",

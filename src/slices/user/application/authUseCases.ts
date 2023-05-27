@@ -1,6 +1,6 @@
 import { userApi, userStore } from "../services";
 import { IUserApi, IUserStore } from "./ports";
-import { INavigate } from "../../../shared/ports";
+import { INavigate } from "shared/ports";
 import { navigate } from "../../../navigate";
 
 export class AuthUseCases {
