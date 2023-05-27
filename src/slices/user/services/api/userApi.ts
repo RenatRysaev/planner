@@ -9,7 +9,6 @@ export const userApi: IUserApi = {
           id: "1",
           email: "vasyapupkin@gmail.com",
           name: "Vasya",
-          surname: "Pupkin",
           role: "reader",
         });
       }, 1000);

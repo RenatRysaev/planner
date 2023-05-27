@@ -5,23 +5,20 @@ import { HttpStatus } from "shared/enums/httpStatus";
 const fakeTeam: ITeam = [
   {
     id: "1",
-    email: "1@gmail.com",
-    name: "1name",
-    surname: "1surname",
-    role: "reader",
+    email: "admin@gmail.com",
+    name: "I am admin motherfucka",
+    role: "admin",
   },
   {
     id: "2",
     email: "2@gmail.com",
     name: "2name",
-    surname: "2surname",
     role: "reader",
   },
   {
     id: "3",
     email: "3@gmail.com",
     name: "3name",
-    surname: "3surname",
     role: "reader",
   },
 ];

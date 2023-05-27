@@ -7,7 +7,6 @@ const emptyUser: User = {
   id: "",
   email: "",
   name: "",
-  surname: "",
   role: "reader",
 };
 

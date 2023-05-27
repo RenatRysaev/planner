@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { Table, Typography } from "antd";
+import { Table, Typography, Spin } from "antd";
 import type { ColumnsType } from "antd/es/table";
 
 import { User } from "slices/user/domain";
@@ -15,9 +15,6 @@ const columns: ColumnsType<User> = [
     title: "Name",
     dataIndex: "name",
     key: "name",
-    render: (value, record) => {
-      return `${record.name} ${record.surname}`;
-    },
   },
   {
     title: "Email",
@@ -42,11 +39,9 @@ export const Team = observer(() => {
 
       <AddTeamMember />
 
-      {teamStore.isLoading ? (
-        <div>Loading...</div>
-      ) : (
+      <Spin spinning={teamStore.isLoading}>
         <Table columns={columns} dataSource={teamStore.team} rowKey="id" />
-      )}
+      </Spin>
     </Layer>
   );
 });

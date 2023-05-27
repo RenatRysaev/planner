@@ -1,23 +1,39 @@
 import { useState } from "react";
 import { Button, Modal, Input, Select } from "antd";
-import { useForm, Controller, FieldValues } from "react-hook-form";
+import type { SubmitHandler } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+
+import { User } from "slices/user/domain";
+import { teamUseCases } from "slices/team/application";
 
 import styles from "./styles.module.scss";
 
 const formId = "add-team-member-form";
 
+type FormValues = Omit<User, "id">;
+
 export const AddTeamMember = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-  const { handleSubmit, control } = useForm({
+  const { handleSubmit, control, reset } = useForm<FormValues>({
     defaultValues: {
       name: "",
-      surname: "",
       email: "",
       role: "reader",
     },
   });
 
-  const onSubmit = (data: FieldValues) => console.log(data);
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    const id = window.crypto.randomUUID();
+
+    void teamUseCases.addTeamMember({
+      id,
+      ...data,
+    });
+
+    reset();
+
+    closeModal();
+  };
 
   const openModal = () => {
     setIsOpenModal(true);
@@ -38,6 +54,7 @@ export const AddTeamMember = () => {
       </Button>
 
       <Modal
+        title={"Add team member"}
         open={isOpenModal}
         onCancel={closeModal}
         okButtonProps={{ htmlType: "submit", form: formId }}
@@ -60,18 +77,6 @@ export const AddTeamMember = () => {
             )}
           />
           <Controller
-            name="surname"
-            control={control}
-            render={({ field }) => (
-              <Input
-                {...field}
-                className={styles.field}
-                placeholder="Surname"
-                required
-              />
-            )}
-          />
-          <Controller
             name="email"
             control={control}
             render={({ field }) => (
@@ -80,6 +85,7 @@ export const AddTeamMember = () => {
                 className={styles.field}
                 placeholder="Email"
                 required
+                type={"email"}
               />
             )}
           />
