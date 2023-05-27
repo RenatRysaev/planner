@@ -2,18 +2,25 @@ import { ITeamApi, ITeamStore } from "./ports";
 import { teamApi, teamStore } from "../services";
 import { User } from "../../user/domain";
 import { HttpStatus } from "shared/enums/httpStatus";
+import { INotifier, notifier } from "shared/notifier";
 
 export class TeamUseCases {
   private teamStore: ITeamStore;
   private teamApi: ITeamApi;
+  private notifier: INotifier;
 
   constructor({
     dependencies,
   }: {
-    dependencies: { teamStore: ITeamStore; teamApi: ITeamApi };
+    dependencies: {
+      teamStore: ITeamStore;
+      teamApi: ITeamApi;
+      notifier: INotifier;
+    };
   }) {
     this.teamStore = dependencies.teamStore;
     this.teamApi = dependencies.teamApi;
+    this.notifier = dependencies.notifier;
   }
 
   public getTeam = async () => {
@@ -37,9 +44,8 @@ export class TeamUseCases {
 
       if (responseStatus === HttpStatus.created) {
         this.teamStore.saveTeam(this.teamStore.team.concat(teamMember));
-        // notification about success add
-      } else {
-        // notification about failure add
+
+        this.notifier.success("User successfully created");
       }
     } catch (error) {
       this.teamStore.setLoadingError(String(error));
@@ -59,9 +65,8 @@ export class TeamUseCases {
           (teamMember) => teamMember.id !== teamMemberId
         );
         this.teamStore.saveTeam(newTeam);
-        // notification about success add
-      } else {
-        // notification about failure add
+
+        this.notifier.success("User successfully removed");
       }
     } catch (error) {
       this.teamStore.setLoadingError(String(error));
@@ -85,9 +90,8 @@ export class TeamUseCases {
             : teamMember
         );
         this.teamStore.saveTeam(newTeam);
-        // notification about success add
-      } else {
-        // notification about failure add
+
+        this.notifier.success("User successfully edited");
       }
     } catch (error) {
       this.teamStore.setLoadingError(String(error));
@@ -98,5 +102,5 @@ export class TeamUseCases {
 }
 
 export const teamUseCases = new TeamUseCases({
-  dependencies: { teamStore, teamApi },
+  dependencies: { teamStore, teamApi, notifier },
 });
