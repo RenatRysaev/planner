@@ -1,7 +1,7 @@
 import { ITeam } from "../domain";
 import { INetworkStore } from "shared/ports";
 import { HttpStatus } from "shared/enums/httpStatus";
-import { User } from "../../user/domain";
+import { User } from "slices/user/domain";
 
 export type ITeamApi = {
   getTeam: () => Promise<ITeam>;
@@ -14,4 +14,5 @@ export type ITeamStore = {
   team: ITeam;
   saveTeam: (team: ITeam) => void;
   resetTeam: () => void;
+  getTeamMemberById: (id: UniqueId) => User;
 } & INetworkStore;
