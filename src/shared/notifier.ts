@@ -1,11 +1,11 @@
-import { toast } from "react-toastify";
+import { message } from "antd";
 
 export type INotifier = {
-  success: typeof toast.success;
-  error: typeof toast.error;
+  success: typeof message.success;
+  error: typeof message.error;
 };
 
 export const notifier: INotifier = {
-  success: toast.success,
-  error: toast.error,
+  success: message.success,
+  error: message.error,
 };
